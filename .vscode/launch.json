@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-StartBookApplication<spring-rest-security>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.hot.StartBookApplication",
+            "projectName": "spring-rest-security",
+            "args": ""
+        }
+    ]
+}

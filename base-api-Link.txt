@@ -1,0 +1,79 @@
+Ref:
+-api security
+https://mkyong.com/spring-boot/spring-rest-spring-security-example/
+
+-ency
+https://bcrypt-generator.com
+
+-maria db
+https://mariadb.com/resources/blog/installing-mariadb-10-1-16-on-mac-os-x-with-homebrew/
+
+-marisdb crud
+https://www.javaguides.net/2020/01/spring-boot-mariadb-crud-example-tutorial.html
+
+
+test: pass plain text pwd here, passwordEncoder() will will encode it beofore comparing to DB
+curl localhost:8080/books/1 -u u1:p1
+
+curl -X POST localhost:8080/books -H "Content-type:application/json" -d "{\"name\":\"ABC\",\"author\":\"hot\",\"price\":8.88}" -u admin:p2
+
+cmd:
+mysql.server start
+mysql.server stop
+
+mysql -u root -p
+mysql -u apiuser -p 
+apiuserpwd1
+use cg_khasara;
+show tables;
+select * from users;
+
+db command:
+CREATE USER 'apiuser'@localhost IDENTIFIED BY 'apiuserpwd1';
+
+SELECT User FROM mysql.user;
+
+DROP USER 'apiuser'@localhost;
+
+uses:
+apiuser apiuserpwd1
+
+GRANT ALL PRIVILEGES ON *.* TO 'apiuser'@localhost IDENTIFIED BY 'apiuserpwd1';
+
+GRANT ALL PRIVILEGES ON cg_khasara.* TO 'apiuser'@cg_khasara IDENTIFIED BY 'apiuserpwd1';
+FLUSH PRIVILEGES;
+SHOW GRANTS FOR 'apiuser'@localhost;
+
+CREATE TABLE users (
+  username VARCHAR(50) NOT NULL,
+  password VARCHAR(100) NOT NULL,
+  enabled TINYINT NOT NULL DEFAULT 1,
+  PRIMARY KEY (username)
+);
+
+CREATE TABLE authorities (
+  username VARCHAR(50) NOT NULL,
+  authority VARCHAR(50) NOT NULL,
+  FOREIGN KEY (username) REFERENCES users(username)
+);
+
+
+INSERT INTO users (username, password, enabled)
+  values ('u1','p1',1);
+update users set password ='$2a$12$zqOKxLkBbMz60QfXu4AOVedHktiU//rw43oaIgeNGMs//JtuoGU4a';
+
+INSERT INTO users (username, password, enabled)
+  values ('admin','$2a$12$zZdh9R.ymXbn5YL1pYV.B.VbMBFABGmiRQepVbb3l3CPnOiyMQKIG',1);
+
+INSERT INTO authorities (username, authority)  values ('u1', 'ROLE_USER');
+INSERT INTO authorities (username, authority)  values ('admin', 'ROLE_ADMIN');
+INSERT INTO authorities (username, authority)  values ('admin', 'ROLE_USER');
+
+  CREATE TABLE book (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  name varchar(45) NOT NULL,
+  author varchar(64) NOT NULL,
+  price DECIMAL(8,2) NOT NULL,
+  enabled tinyint(4) DEFAULT NULL,
+  PRIMARY KEY (id)
+);
